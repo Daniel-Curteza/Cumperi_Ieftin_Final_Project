@@ -1,10 +1,9 @@
-package Tests;
+package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import utils.BrowserUtils;
 
 public class LoginTest extends BaseTest {
     @DataProvider

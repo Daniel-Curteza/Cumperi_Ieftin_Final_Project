@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.siit.automation-local-project</groupId>
+    <groupId>org.siit.Cumperi_Ieftin_Final_Project</groupId>
     <artifactId>Cumperi_Ieftin_Daniel_Curteza</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -12,44 +12,58 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junitVersion>4.13.2</junitVersion>
-        <testNgVersion>7.10.2</testNgVersion>
-        <seleniumVersion>4.26.0</seleniumVersion>
-        <lombokVersion>1.18.34</lombokVersion>
+        <selenium.version>4.26.0</selenium.version>
+        <testNg.version>7.10.2</testNg.version>
+        <lombok.version>1.18.34</lombok.version>
         <commons-io-Version>2.17.0</commons-io-Version>
+        <opencsv.version>5.9</opencsv.version>
+        <jackson-databind.version>2.17.2</jackson-databind.version>
+        <mysql-connector-java>8.0.33</mysql-connector-java>
+        <xmlSuite>runSuites/regression_run.xml</xmlSuite>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junitVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
-        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${testNgVersion}</version>
+            <version>${testNg.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${seleniumVersion}</version>
+            <version>${selenium.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombokVersion}</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io-Version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>${opencsv.version}</version>
+        </dependency>
+        <!-- sql  -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -73,9 +87,6 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.1</version>
                     <configuration>
-                        <suiteXmlFiles>
-                            <suiteXmlFile>${xmlSuite}</suiteXmlFile>
-                        </suiteXmlFiles>
                         <testFailureIgnore>true</testFailureIgnore>
                     </configuration>
                 </plugin>
