@@ -20,7 +20,7 @@ public class BaseTest {
     public void getBrowser() {
         String browserName = ConfigUtils.readGenericElementFromConfig(ConstantUtils.DEFAULT_CONFIG_FILE,
                 "browser", "chrome");
-        System.out.println("Load browser type: " + browserName);
+        System.out.println("Loading browser type: " + browserName);
         driver = BrowserUtils.getDriver(browserName);
         basePage = new BasePage(driver);
     }
@@ -32,7 +32,7 @@ public class BaseTest {
 
     private void closeBrowserAtEnd() {
         if (driver != null) {
-            System.out.println("Close browser at the end of test");
+            System.out.println("=========Closing browser========");
             driver.quit();
         }
     }
@@ -42,7 +42,7 @@ public class BaseTest {
         closeBrowserAtEnd();
     }
 
-    @AfterMethod
+   @AfterMethod
     public void cleanUpAfterMethod() {
         closeBrowserAtEnd();
     }
@@ -56,7 +56,7 @@ public class BaseTest {
     }
 
     public void navigateToURL(String path) {
-        System.out.println("Open next url:" + baseURL + path);
+        System.out.println("Open url:" + baseURL + path);
         driver.navigate().to(baseURL + path);
     }
 }

@@ -1,0 +1,17 @@
+[
+  {
+    "account": {
+      "name": "automation",
+      "firstName" : "automation",
+      "email": "test@gmail.com",
+      "phone" : "1234567",
+      "address": "automation",
+      "city": "automation",
+      "password": "automation"
+
+    },
+    "regErr": ""
+  }
+
+
+]

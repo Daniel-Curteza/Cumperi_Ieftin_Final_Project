@@ -1,0 +1,27 @@
+[
+  {
+    "account": {
+      "email": "test@gmail.com",
+      "password": "automation",
+      "name": "automation"
+    },
+    "authErr": ""
+  },
+  {
+    "account": {
+      "email": "aa@aa.aa",
+      "password": "automation",
+      "name" : "automation"
+    },
+    "authErr": "Eroare: Nici o potrivire pentru e-mail si/sau Parola."
+  },
+  {
+    "account": {
+      "email": "123@123.12",
+      "password": "automation",
+      "name" : "automation"
+    },
+    "authErr": "Eroare: Nici o potrivire pentru e-mail si/sau Parola."
+  }
+
+]

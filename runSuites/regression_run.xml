@@ -3,7 +3,7 @@
 <suite name="RegressionTests">
     <test thread-count="5" name="Cumperi_Ieftin_Final_Project">
         <classes>
-            <class name="tests.LoginTest"/>
+            <class name="tests.AuthenticationTest"/>
         </classes>
     </test> <!-- Cumperi_Ieftin_Final_Project -->
 </suite>
