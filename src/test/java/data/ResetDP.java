@@ -1,26 +1,27 @@
 package data;
 
-import POJO.AuthenticationModel;
 import POJO.RegistrationModel;
+import POJO.ResetModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.DataProvider;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class RegistrationDP {
-    @DataProvider(name = "regJsonDataProvider")
+public class ResetDP {
+    @DataProvider(name = "resetJsonDataProvider")
     public Iterator<Object[]> regJsonDataProvider() throws IOException {
         Collection<Object[]> dp = new ArrayList<>();
 
-        File jsonFile = new File("src/test/resources/testData/regTestDataInput.json");
+        File jsonFile = new File("src/test/resources/testData/resetTestDataInput.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        RegistrationModel[] registrationModelList = objectMapper.readValue(jsonFile, RegistrationModel[].class);
+        ResetModel[] resetModelList = objectMapper.readValue(jsonFile, ResetModel[].class);
 
-        for (RegistrationModel lm : registrationModelList)
+        for (ResetModel lm : resetModelList)
             dp.add(new Object[]{lm});
 
         return dp.iterator();

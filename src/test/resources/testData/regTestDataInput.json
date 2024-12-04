@@ -1,0 +1,47 @@
+[
+  {
+    "regAccount": {
+      "name": "automation",
+      "firstName" : "automation",
+      "email": "automation@automation.com",
+      "phone" : "1234567",
+      "address": "automation",
+      "city": "automation",
+      "county": "Cluj",
+      "password": "automation2"
+
+    },
+    "regErr": "Eroare: Adresa de e-mail exista in baza de date!"
+  },
+  {
+    "regAccount": {
+      "name": "automaton",
+      "firstName" : "automaton",
+      "email": "automaton@automaton.com",
+      "phone" : "1234567",
+      "address": "automaton",
+      "city": "automaton",
+      "county": "Cluj",
+      "password": "automaton"
+
+    },
+    "regErr": "Eroare: Adresa de e-mail exista in baza de date!"
+  },
+
+  {
+    "regAccount": {
+      "name": "success",
+      "firstName" : "success",
+      "email": "asuccess@success.com",
+      "phone" : "1234567",
+      "address": "success",
+      "city": "success",
+      "county": "Cluj",
+      "password": "success"
+
+    },
+    "regErr": "Eroare: Adresa de e-mail exista in baza de date!"
+  }
+
+
+]

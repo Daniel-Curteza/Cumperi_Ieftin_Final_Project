@@ -7,19 +7,21 @@ public class RegistrationAccountModel {
     private String phone;
     private String address;
     private String city;
+    private String county;
     private String password;
 
     public RegistrationAccountModel(){
         super();
     }
 
-    public RegistrationAccountModel(String name, String firstName, String email, String phone, String address, String city, String password){
+    public RegistrationAccountModel(String name, String firstName, String email, String phone, String address, String city, String county,String password){
         this.name = name;
         this.firstName = firstName;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.city = city;
+        this.county = county;
         this.password = password;
 
     }
@@ -41,6 +43,9 @@ public class RegistrationAccountModel {
 
     public String getCity() {return city;}
     public void setCity(String city) {this.city = city;}
+
+    public String getCounty() {return county;}
+    public void setCounty(String county) {this.county = county;}
 
     public String getPassword() {return password;}
     public void setPassword(String password) {this.password = password;}

@@ -61,7 +61,7 @@ public class AuthenticationPage extends BasePage {
 
     public boolean verifyLoginSuccessful(String name) {
 
-        //waitUntilElementVisible(authenticationMessageElement);
+        waitUntilElementVisible(authenticationMessageElement);
         System.out.println("Authentication successful with message: " + '"' + authenticationMessageElement.getText() + '"');
         return authenticationMessageElement.isDisplayed();
     }

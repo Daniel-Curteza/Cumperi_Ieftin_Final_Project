@@ -1,14 +1,15 @@
 package pages;
 
-import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
-@Slf4j
 public class RegistrationPage extends BasePage{
+
+    @FindBy(xpath = "//*[@id=\"popdown_ok\"]")
+    private  WebElement AcceptCookies;
 
     @FindBy(xpath = "//*[@id=\"content\"]/h1")
     private  WebElement InregistrareCont;
@@ -31,18 +32,27 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath = "//*[@id=\"content\"]/form/div[2]/table/tbody/tr[7]/td[2]/input")
     private  WebElement registerCity;
 
+    @FindBy(xpath = "//*[@id=\"content\"]/form/div[2]/table/tbody/tr[10]/td[2]/select")
+    private  WebElement registerCounty;
+
     @FindBy(xpath = "//*[@id=\"content\"]/form/div[3]/table/tbody/tr[1]/td[2]/input")
     private  WebElement registerPassword;
 
     @FindBy(xpath = "//*[@id=\"content\"]/form/div[3]/table/tbody/tr[2]/td[2]/input")
     private  WebElement registerRetypePassword;
 
+    @FindBy(xpath = "//*[@id=\"content\"]/form/div[5]/div/input[1]")
+    private  WebElement termsBox;
+
     @FindBy(xpath = "//*[@id=\"content\"]/form/div[5]/div/input[2]")
     private  WebElement registerSubmitButton;
 
-    @FindBy (xpath = "//*[@id=\"content\"]/h1")
-    private WebElement registrationWarningMessageElement;
+    @FindBy(xpath = "//h1[contains(text(), 'Contul tau a fost creat!')]")
+    private WebElement registrationSuccessElement;
 
+    @FindBy (xpath = "//div[contains(text(), 'Eroare:')]")
+    private WebElement registrationWarningMessageElement;
+    private String county;
 
 
     public RegistrationPage(WebDriver driver){
@@ -50,31 +60,41 @@ public class RegistrationPage extends BasePage{
         PageFactory.initElements(driver, this);
     }
 
-    public void register (String name, String firstName, String email, String phone, String address, String city, String password){
+    public void register (String name, String firstName, String email, String phone, String address, String city, String county, String password){
+        this.acceptCookies();
         waitUntilElementVisible(InregistrareCont);
+        this.county = county;
         this.enterRegisterName(name);
         this.enterRegisterFirstName(firstName);
         this.registerEmail(email);
         this.enterRegisterPhone(phone);
         this.enterRegisterAddress(address);
         this.enterRegisterCity(city);
+        this.selectCounty();
         this.enterRegisterPassword(password);
         this.enterRegisterRetypePassword(password);
+        this.selectTerms();
         this.registerSubmit();
     }
 
+    public void acceptCookies(){
+        waitUntilElementVisible(AcceptCookies);
+        System.out.println("Accepting cookies");
+        AcceptCookies.click();
+    }
+
     public void enterRegisterName(String name) {
-        waitUntilElementVisible(registerEmail);
+        waitUntilElementVisible(registerName);
         System.out.println("Entering name: " + name);
-        registerEmail.clear();
-        registerEmail.sendKeys(name);
+        registerName.clear();
+        registerName.sendKeys(name);
     }
 
     public void enterRegisterFirstName(String firstName) {
         waitUntilElementVisible(registerFirstName);
         System.out.println("Entering first name :" + firstName);
-        registerEmail.clear();
-        registerEmail.sendKeys(firstName);
+        registerFirstName.clear();
+        registerFirstName.sendKeys(firstName);
     }
 
     public void registerEmail(String email) {
@@ -87,36 +107,52 @@ public class RegistrationPage extends BasePage{
     public void enterRegisterPhone(String phone) {
         waitUntilElementVisible(registerPhone);
         System.out.println("Entering phone: " + phone);
-        registerEmail.clear();
-        registerEmail.sendKeys(phone);
+        registerPhone.clear();
+        registerPhone.sendKeys(phone);
     }
 
     public void enterRegisterAddress(String address) {
         waitUntilElementVisible(registerAddress);
         System.out.println("Entering address: " + address);
-        registerEmail.clear();
-        registerEmail.sendKeys(address);
+        registerAddress.clear();
+        registerAddress.sendKeys(address);
     }
 
     public void enterRegisterCity(String city) {
         waitUntilElementVisible(registerCity);
         System.out.println("Entering city: " + city);
-        registerEmail.clear();
-        registerEmail.sendKeys(city);
+        registerCity.clear();
+        registerCity.sendKeys(city);
+    }
+
+    public void selectCounty(){
+        waitUntilElementVisible(registerCounty);
+        Select dropdown = new Select(registerCounty);
+        System.out.println("Selecting county: " + county);
+        dropdown.selectByVisibleText(county);
+
     }
 
     public void enterRegisterPassword(String password) {
         waitUntilElementVisible(registerPassword);
         System.out.println("Entering password: " + password);
-        registerEmail.clear();
-        registerEmail.sendKeys(password);
+        registerPassword.clear();
+        registerPassword.sendKeys(password);
     }
 
     public void enterRegisterRetypePassword(String password) {
         waitUntilElementVisible(registerRetypePassword);
         System.out.println("Retyping password: " + password);
-        registerEmail.clear();
-        registerEmail.sendKeys(password);
+        registerRetypePassword.clear();
+        registerRetypePassword.sendKeys(password);
+    }
+
+    public void selectTerms(){
+        waitUntilElementVisible(termsBox);
+        System.out.println("Accepting Terms and Conditions");
+        if (!termsBox.isSelected()){
+            termsBox.click();
+        }
     }
 
     public void registerSubmit(){
@@ -125,13 +161,13 @@ public class RegistrationPage extends BasePage{
 
     public boolean verifyRegistrationSuccessful(String name) {
 
-        WebElement welcomeMessage = waitUntilElementVisible(By.partialLinkText("Esti conectat ca "));
-        System.out.println("Login successful with message: Esti conectat ca " + name);
-        return welcomeMessage.isDisplayed();
+        waitUntilElementVisible(registrationSuccessElement);
+        System.out.println("Registration successful with message: Esti conectat ca " + name);
+        return registrationSuccessElement.isDisplayed();
     }
     public boolean verifyRegistrationFailed(String errorMessage) {
         waitUntilElementVisible(registrationWarningMessageElement);
-        System.out.println("Error message displayed: " + registrationWarningMessageElement.getText());
+        System.out.println("Error message displayed: " + '"' + registrationWarningMessageElement.getText() + '"');
         return registrationWarningMessageElement.getText().equalsIgnoreCase(errorMessage);
     }
 

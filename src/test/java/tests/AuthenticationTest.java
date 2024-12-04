@@ -9,17 +9,17 @@ import pages.AuthenticationPage;
 public class AuthenticationTest extends BaseTest {
 
     @Test(dataProvider = "authJsonDataProvider", dataProviderClass = AuthenticationDP.class)
-    public void loginWithLoginModel(AuthenticationModel authenticationModel) throws InterruptedException {
+    public void authWithAuthModel(AuthenticationModel authenticationModel) throws InterruptedException {
         setUp();
-        navigateToURL("/account/login");
+        navigateToURL("account/login");
 
         AuthenticationPage authenticationPage = new AuthenticationPage(driver);
         System.out.println(authenticationModel);
-        authenticationPage.login(authenticationModel.getAccount().getEmail(), authenticationModel.getAccount().getPassword());
+        authenticationPage.login(authenticationModel.getAuthAccount().getEmail(), authenticationModel.getAuthAccount().getPassword());
 
         if (authenticationModel.getAuthErr().isEmpty()) {
             System.out.println("Verifying successful authentication");
-            Assert.assertTrue(authenticationPage.verifyLoginSuccessful(authenticationModel.getAccount().getName()));
+            Assert.assertTrue(authenticationPage.verifyLoginSuccessful(authenticationModel.getAuthAccount().getName()));
         } else {
             System.out.println("Verifying failed authentication");
             Assert.assertTrue(authenticationPage.verifyLoginFailed(authenticationModel.getAuthErr()));

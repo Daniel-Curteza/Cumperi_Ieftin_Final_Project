@@ -4,21 +4,21 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class AuthenticationModel {
-    private AuthenticationAccountModel account;
+    private AuthenticationAccountModel authAccount;
     private  String authErr;
     public AuthenticationModel(){
 
     }
 
     public AuthenticationModel(String email, String password, String name, String loginErr) {
-        this.account = new AuthenticationAccountModel(email, password, name);
+        this.authAccount = new AuthenticationAccountModel(email, password, name);
         this.authErr = loginErr;
     }
-    public AuthenticationAccountModel getAccount(){return account;}
+    public AuthenticationAccountModel getAuthAccount(){return authAccount;}
 
     @XmlElement
-    public void setAccount(AuthenticationAccountModel account) {
-        this.account = account;
+    public void setAuthAccount(AuthenticationAccountModel authAccount) {
+        this.authAccount = authAccount;
     }
 
     public String getAuthErr() {return authErr;}
@@ -31,8 +31,8 @@ public class AuthenticationModel {
     @Override
     public String toString() {
         return "AuthenticationModel value: {\n" +
-                "account:{ \n email=" + account.getEmail() + ",\n password=" + account.getPassword() +
-                "\n name=" + account.getName() + '}';
+                "authAccount:{ \n email=" + authAccount.getEmail() + ",\n password=" + authAccount.getPassword() +
+                "\n name=" + authAccount.getName() + '}';
     }
 }
 
