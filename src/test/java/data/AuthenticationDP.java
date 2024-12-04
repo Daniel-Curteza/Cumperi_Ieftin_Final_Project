@@ -14,7 +14,7 @@ public class AuthenticationDP {
     public Iterator<Object[]> authJsonDataProvider() throws IOException {
         Collection<Object[]> dp = new ArrayList<>();
 
-        File jsonFile = new File("src/test/resources/testData/authTestDataInput.json");
+        File jsonFile = new File("src/test/resources/testData/AuthTestData.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
         AuthenticationModel[] authenticationModelList = objectMapper.readValue(jsonFile, AuthenticationModel[].class);

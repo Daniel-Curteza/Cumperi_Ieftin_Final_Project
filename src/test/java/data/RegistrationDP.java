@@ -15,7 +15,7 @@ public class RegistrationDP {
     public Iterator<Object[]> regJsonDataProvider() throws IOException {
         Collection<Object[]> dp = new ArrayList<>();
 
-        File jsonFile = new File("src/test/resources/testData/regTestDataInput.json");
+        File jsonFile = new File("src/test/resources/testData/RegistrationTestData.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
         RegistrationModel[] registrationModelList = objectMapper.readValue(jsonFile, RegistrationModel[].class);

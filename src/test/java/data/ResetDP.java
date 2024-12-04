@@ -1,7 +1,6 @@
 package data;
 
-import POJO.RegistrationModel;
-import POJO.ResetModel;
+import POJO.PasswordResetModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.DataProvider;
 
@@ -16,12 +15,12 @@ public class ResetDP {
     public Iterator<Object[]> regJsonDataProvider() throws IOException {
         Collection<Object[]> dp = new ArrayList<>();
 
-        File jsonFile = new File("src/test/resources/testData/resetTestDataInput.json");
+        File jsonFile = new File("src/test/resources/testData/PasswordResetTestData.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        ResetModel[] resetModelList = objectMapper.readValue(jsonFile, ResetModel[].class);
+        PasswordResetModel[] passwordResetModelList = objectMapper.readValue(jsonFile, PasswordResetModel[].class);
 
-        for (ResetModel lm : resetModelList)
+        for (PasswordResetModel lm : passwordResetModelList)
             dp.add(new Object[]{lm});
 
         return dp.iterator();

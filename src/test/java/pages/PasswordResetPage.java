@@ -9,10 +9,13 @@ public class PasswordResetPage extends BasePage{
     @FindBy(linkText = "Parola Uitata")
     private WebElement passwordResetLink;
 
-    @FindBy(xpath = "//input[@name='email']")
+    @FindBy(xpath = "//*[@id=\"popdown_ok\"]")
+    private  WebElement AcceptCookies;
+
+    @FindBy(xpath = "/html/body/div[2]/div[5]/div[3]/form/div[1]/table/tbody/tr/td[2]/input")
     private WebElement emailField;
 
-    @FindBy(xpath = "//input[@class='button']")
+    @FindBy(xpath = "//input[@value='Continuare']")
     private WebElement passwordResetSubmitButton;
 
     @FindBy(xpath ="//div[@class='success']" )
@@ -26,10 +29,17 @@ public class PasswordResetPage extends BasePage{
         PageFactory.initElements(driver,this);
     }
 
-    public void reset (String email){
+    public void resetPassword (String email){
+        this.acceptCookies();
         this.passwordReset(email);
         this.enterResetEmail(email);
         this.passwordResetSubmit();
+    }
+
+    public void acceptCookies(){
+        waitUntilElementVisible(AcceptCookies);
+        System.out.println("Accepting cookies");
+        AcceptCookies.click();
     }
 
     public void passwordReset(String email){
@@ -42,7 +52,7 @@ public class PasswordResetPage extends BasePage{
         waitUntilElementVisible(emailField);
         System.out.println("Entering email for existing account" + email);
         emailField.clear();
-        emailField.sendKeys();
+        emailField.sendKeys(email);
     }
 
     public void passwordResetSubmit(){
@@ -50,10 +60,10 @@ public class PasswordResetPage extends BasePage{
         passwordResetSubmitButton.click();
     }
 
-    public boolean verifyResetSuccessful(){
+    public boolean verifyResetSuccessful(String email){
         waitUntilElementVisible(resetSuccessfulMessage);
-        System.out.println("Reset successful with message: " + resetFailedMessage.getText()+ '"');
-        return resetFailedMessage.isDisplayed();
+        System.out.println("Reset successful with message: " + resetSuccessfulMessage.getText()+ '"');
+        return resetSuccessfulMessage.isDisplayed();
     }
 
     public boolean verifyResetFailed(String errorMessage){
