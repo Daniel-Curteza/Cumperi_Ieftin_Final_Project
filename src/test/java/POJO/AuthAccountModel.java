@@ -1,16 +1,16 @@
 package POJO;
 
 
-public class AuthenticationAccountModel {
+public class AuthAccountModel {
     private String name;
     private String email;
     private String password;
 
-    public AuthenticationAccountModel() {
+    public AuthAccountModel() {
         super();
     }
 
-    public AuthenticationAccountModel(String email, String password, String name) {
+    public AuthAccountModel(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;

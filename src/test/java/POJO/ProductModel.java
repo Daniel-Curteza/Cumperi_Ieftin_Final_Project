@@ -5,19 +5,19 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ProductModel {
-    private ModelModel prodModel;
+    private ProductModelModel prodModel;
     private String modelError;
     public ProductModel() {}
 
-    public ProductModel(String model, String quantity,String modelError) {
-        this.prodModel= new ModelModel(model, quantity);
+    public ProductModel(String model, String quantity, String modelError) {
+        this.prodModel= new ProductModelModel(model, quantity);
         this.modelError = modelError;
     }
 
-    public ModelModel getProdModel() {return prodModel;}
+    public ProductModelModel getProdModel() {return prodModel;}
 
     @XmlElement
-    public void setProdModel(ModelModel prodModel) {this.prodModel = prodModel;}
+    public void setProdModel(ProductModelModel prodModel) {this.prodModel = prodModel;}
 
     public String getModelError() {return modelError;}
 

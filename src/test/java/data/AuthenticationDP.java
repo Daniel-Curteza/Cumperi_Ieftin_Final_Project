@@ -1,6 +1,6 @@
 package data;
 
-import POJO.AuthenticationModel;
+import POJO.AuthModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.DataProvider;
 import java.io.File;
@@ -17,9 +17,9 @@ public class AuthenticationDP {
         File jsonFile = new File("src/test/resources/testData/AuthTestData.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        AuthenticationModel[] authenticationModelList = objectMapper.readValue(jsonFile, AuthenticationModel[].class);
+        AuthModel[] authModelList = objectMapper.readValue(jsonFile, AuthModel[].class);
 
-        for (AuthenticationModel lm : authenticationModelList)
+        for (AuthModel lm : authModelList)
             dp.add(new Object[]{lm});
 
         return dp.iterator();

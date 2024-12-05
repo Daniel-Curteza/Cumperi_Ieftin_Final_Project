@@ -1,6 +1,6 @@
 package POJO;
 
-public class RegistrationAccountModel {
+public class RegAccountModel {
     private String name;
     private String firstName;
     private String email;
@@ -10,11 +10,11 @@ public class RegistrationAccountModel {
     private String county;
     private String password;
 
-    public RegistrationAccountModel(){
+    public RegAccountModel(){
         super();
     }
 
-    public RegistrationAccountModel(String name, String firstName, String email, String phone, String address, String city, String county,String password){
+    public RegAccountModel(String name, String firstName, String email, String phone, String address, String city, String county, String password){
         this.name = name;
         this.firstName = firstName;
         this.email = email;

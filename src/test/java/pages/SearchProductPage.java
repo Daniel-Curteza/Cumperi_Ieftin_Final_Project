@@ -38,22 +38,41 @@ public class SearchProductPage extends BasePage {
     @FindBy(xpath = "//input[@class='w30']")
     public WebElement cartQuantity;
 
+    @FindBy(xpath = "//a[@class='wishlist']")
+    public WebElement linkAddWishlist;
+
+    @FindBy (partialLinkText = "Succes")
+    public WebElement wishlistAddMessage;
+
+    @FindBy(partialLinkText = "conectat")
+    public WebElement accountLink;
+
+    @FindBy (partialLinkText = "Wish")
+    public WebElement linkWishlist;
+
+    @FindBy (xpath = "/html/body/div[2]/div[5]/div[4]/div[2]")
+    public WebElement wishlistEmpty;
+
+
+
+
 
     public SearchProductPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public void searchProduct(String model, String quantity) {
+    public void AddProductCart(String model, String quantity) {
         this.acceptCookies();
-        this.enterProductModelSearch(model);
+        this.enterProductModel(model);
         this.submitSearch();
         this.selectProduct();
         this.selectQuantity(quantity);
         this.addToCart();
         this.openCartPopUp();
         this.openCart();
-        this.verifyQuantity(quantity);
+        this.verifyQuantityCorrect(quantity);
+        this.verifyQuantityIncorrect(quantity);
 
     }
 
@@ -63,7 +82,7 @@ public class SearchProductPage extends BasePage {
         AcceptCookies.click();
     }
 
-    public void enterProductModelSearch(String model) {
+    public void enterProductModel(String model) {
         waitUntilElementVisible(searchBox);
         System.out.println("Entering product model");
         searchBox.clear();
@@ -110,15 +129,57 @@ public class SearchProductPage extends BasePage {
         openCartButton.click();
     }
 
-    public boolean verifyQuantity(String quantity) {
+    public boolean verifyQuantityCorrect(String quantity) {
         waitUntilElementVisible(cartQuantity);
-        System.out.println("Verifying quantity");
-        if (quantity.equals(cartQuantity.getText())) {
-            System.out.println("Quantity correct");
-            return true;
-        } else {
-            System.out.println("Quantity incorrect");
-            return false;
-        }
+        System.out.println("Verifying correct quantity");
+        return cartQuantity.getText().equals(quantity);
     }
+
+    public boolean verifyQuantityIncorrect(String quantity) {
+        waitUntilElementVisible(cartQuantity);
+        System.out.println("Verifying incorrect quantity");
+        return !cartQuantity.getText().equals(quantity);
+    }
+
+    public void AddProductWishlist(String model){
+        this.acceptCookies();
+        this.enterProductModel(model);
+        this.submitSearch();
+        this.selectProduct();
+        this.addToWishlist();
+        this.accessAccount();
+        this.openWishlist();
+    }
+
+    public void addToWishlist() {
+        waitUntilElementVisible(linkAddWishlist);
+        System.out.println("Adding to wishlist");
+        linkAddWishlist.click();
+        waitUntilElementVisible(wishlistAddMessage);
+    }
+
+    public void accessAccount() {
+        waitUntilElementVisible(accountLink);
+        System.out.println("Accessing my account page");
+        accountLink.click();
+    }
+
+    public void openWishlist() {
+        waitUntilElementVisible(linkWishlist);
+        System.out.println("Opening wishlist");
+        linkWishlist.click();
+    }
+
+    public boolean verifyProductInWishlist() {
+        waitUntilElementVisible(cartProductModel);
+        System.out.println("Verifying wishlist content");
+        return cartProductModel.getText().equals(product.getText());
+    }
+
+    public boolean verifyProductNotInWishlist() {
+        waitUntilElementVisible(wishlistEmpty);
+        System.out.println("Verifying wishlist empty");
+        return !wishlistEmpty.getText().equals(product.getText());
+    }
+
 }

@@ -7,6 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AuthenticationPage extends BasePage {
 
+    @FindBy(xpath = "//*[@id=\"popdown_ok\"]")
+    private WebElement AcceptCookies;
+
     @FindBy(xpath = "//h2[contains(text(),'Client existent')]")
     private  WebElement client_existent;
 
@@ -33,11 +36,17 @@ public class AuthenticationPage extends BasePage {
     }
 
     public void login (String email, String password) {
+        this.acceptCookies();
         waitUntilElementVisible(client_existent);
         this.enterEmail(email);
         this.enterPassword(password);
         this.submit();
 
+    }
+    public void acceptCookies() {
+        waitUntilElementVisible(AcceptCookies);
+        System.out.println("Accepting cookies");
+        AcceptCookies.click();
     }
 
     public void enterEmail(String email) {
@@ -60,11 +69,11 @@ public class AuthenticationPage extends BasePage {
     }
 
     public boolean verifyLoginSuccessful(String name) {
-
         waitUntilElementVisible(authenticationMessageElement);
         System.out.println("Authentication successful with message: " + '"' + authenticationMessageElement.getText() + '"');
         return authenticationMessageElement.isDisplayed();
     }
+
     public boolean verifyLoginFailed(String errorMessage) {
         waitUntilElementVisible(warningMessageElement);
        System.out.println("Authentication failed with message: " + '"' + warningMessageElement.getText()+ '"');

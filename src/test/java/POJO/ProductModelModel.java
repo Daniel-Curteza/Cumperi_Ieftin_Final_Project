@@ -1,12 +1,12 @@
 package POJO;
 
-public class ModelModel {
+public class ProductModelModel {
     private String model;
     private String quantity;
 
-    public ModelModel() {super();}
+    public ProductModelModel() {super();}
 
-    public ModelModel(String model, String quantity) {
+    public ProductModelModel(String model, String quantity) {
         this.model = model;
         this.quantity = quantity;
     }
@@ -16,4 +16,5 @@ public class ModelModel {
 
     public String getQuantity(){return quantity;}
     public void setQuantity(String quantity) {this.quantity = quantity;}
+
 }

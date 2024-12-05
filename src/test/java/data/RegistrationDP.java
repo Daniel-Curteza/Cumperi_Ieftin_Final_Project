@@ -1,7 +1,6 @@
 package data;
 
-import POJO.AuthenticationModel;
-import POJO.RegistrationModel;
+import POJO.RegModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.DataProvider;
 import java.io.File;
@@ -18,9 +17,9 @@ public class RegistrationDP {
         File jsonFile = new File("src/test/resources/testData/RegistrationTestData.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        RegistrationModel[] registrationModelList = objectMapper.readValue(jsonFile, RegistrationModel[].class);
+        RegModel[] regModelList = objectMapper.readValue(jsonFile, RegModel[].class);
 
-        for (RegistrationModel lm : registrationModelList)
+        for (RegModel lm : regModelList)
             dp.add(new Object[]{lm});
 
         return dp.iterator();

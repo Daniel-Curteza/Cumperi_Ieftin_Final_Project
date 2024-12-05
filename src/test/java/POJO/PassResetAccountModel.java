@@ -1,11 +1,11 @@
 package POJO;
 
-public class PasswordResetAccountModel {
+public class PassResetAccountModel {
     private String email;
 
-    public PasswordResetAccountModel(){super();}
+    public PassResetAccountModel(){super();}
 
-    public PasswordResetAccountModel(String email){
+    public PassResetAccountModel(String email){
         this.email = email;
     }
 

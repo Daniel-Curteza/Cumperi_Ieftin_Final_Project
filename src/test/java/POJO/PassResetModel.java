@@ -5,20 +5,20 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement
-public class PasswordResetModel {
-    private PasswordResetAccountModel resetAccount;
+public class PassResetModel {
+    private PassResetAccountModel resetAccount;
     private String resetErr;
-    public PasswordResetModel(){}
+    public PassResetModel(){}
 
-public PasswordResetModel(String email, String resetErr){
-        this.resetAccount = new PasswordResetAccountModel(email);
+public PassResetModel(String email, String resetErr){
+        this.resetAccount = new PassResetAccountModel(email);
         this.resetErr = resetErr;
 }
 
-    public PasswordResetAccountModel getResetAccount(){return resetAccount;}
+    public PassResetAccountModel getResetAccount(){return resetAccount;}
 
     @XmlElement
-    public void setResetAccount(PasswordResetAccountModel resetAccount){this.resetAccount = resetAccount;}
+    public void setResetAccount(PassResetAccountModel resetAccount){this.resetAccount = resetAccount;}
 
     public String getResetErr(){return resetErr;}
 
@@ -27,7 +27,7 @@ public PasswordResetModel(String email, String resetErr){
 
     @Override
     public String toString(){
-        return "PasswordResetAccountModel value:{ \n " +
+        return "PassResetAccountModel value:{ \n " +
                 "resetAccount: { \n email=" + resetAccount.getEmail() + '"';
     }
 }

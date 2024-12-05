@@ -1,6 +1,6 @@
 package data;
 
-import POJO.PasswordResetModel;
+import POJO.PassResetModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.DataProvider;
 
@@ -18,9 +18,9 @@ public class ResetDP {
         File jsonFile = new File("src/test/resources/testData/PasswordResetTestData.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        PasswordResetModel[] passwordResetModelList = objectMapper.readValue(jsonFile, PasswordResetModel[].class);
+        PassResetModel[] passResetModelList = objectMapper.readValue(jsonFile, PassResetModel[].class);
 
-        for (PasswordResetModel lm : passwordResetModelList)
+        for (PassResetModel lm : passResetModelList)
             dp.add(new Object[]{lm});
 
         return dp.iterator();
