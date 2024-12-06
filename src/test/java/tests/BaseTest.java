@@ -10,7 +10,7 @@ import utils.ConstantUtils;
 
 public class BaseTest {
     protected WebDriver driver;
-    protected String baseURL;
+    public String baseURL;
     protected BasePage basePage;
 
     public void getBrowser(String browserName) {

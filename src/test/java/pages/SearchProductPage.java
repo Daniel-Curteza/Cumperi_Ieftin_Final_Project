@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.interactions.Actions;
+import tests.BaseTest;
 
 public class SearchProductPage extends BasePage {
 
@@ -53,6 +54,13 @@ public class SearchProductPage extends BasePage {
     @FindBy (xpath = "/html/body/div[2]/div[5]/div[4]/div[2]")
     public WebElement wishlistEmpty;
 
+    @FindBy (partialLinkText = "Termeni si conditii")
+    public WebElement linkTermsConditions;
+
+    @FindBy(xpath = "//h1[contains(text(),'Termeni si conditii de utilizare')]")
+    public WebElement TermeniConditiiUtilizare;
+
+    public String currentTermsUrl = driver.getCurrentUrl();
 
 
 
@@ -181,5 +189,26 @@ public class SearchProductPage extends BasePage {
         System.out.println("Verifying wishlist empty");
         return !wishlistEmpty.getText().equals(product.getText());
     }
+
+    public void TermsConditions() {
+        this.acceptCookies();
+        this.openTerms();
+        //this.verifyTermsConditionsOpen();
+    }
+
+    public void openTerms() {
+        waitUntilElementVisible(linkTermsConditions);
+        System.out.println("Opening terms");
+        linkTermsConditions.click();
+    }
+
+    //public termsPageUrl (){
+    //}
+
+    /* public boolean verifyTermsConditionsOpen() {
+        waitUntilElementVisible(TermeniConditiiUtilizare);
+        System.out.println("Verifying terms conditions open");
+        return currentTermsUrl.equals();
+    }*/
 
 }

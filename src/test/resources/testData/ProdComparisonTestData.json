@@ -1,0 +1,16 @@
+[
+  {
+    "comparisonModel": {
+      "model1": "HMC-D300RD",
+      "model2": "FTP-850BK"
+    },
+    "emptyErr": ""
+  },
+  {
+    "comparisonModel": {
+      "model1": "010-02562-10",
+      "model2": "010-02430-11"
+    },
+    "emptyErr": "Nu ai ales produse pe care să le compari."
+  }
+]

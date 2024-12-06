@@ -9,7 +9,7 @@ import pages.SearchProductPage;
 public class AddToCartTest extends BaseTest{
 
     @Test(dataProvider = "productModelJsonDataProvider", dataProviderClass = ProductModelDP.class)
-    public void searchAddToCart(ProductModel productModel) throws InterruptedException {
+    public void searchAddToCartTest(ProductModel productModel) throws InterruptedException {
         setUp();
         navigateToURL("");
 

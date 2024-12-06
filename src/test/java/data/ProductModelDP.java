@@ -1,6 +1,6 @@
 package data;
 
-import POJO.ProductModelModel;
+import POJO.ProductModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.DataProvider;
 import java.io.File;
@@ -17,9 +17,9 @@ public class ProductModelDP {
         File jsonFile = new File("src/test/resources/testData/ProductModelTestData.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        ProductModelModel[] modelModelList = objectMapper.readValue(jsonFile, ProductModelModel[].class);
+        ProductModel[] modelModelList = objectMapper.readValue(jsonFile, ProductModel[].class);
 
-        for (ProductModelModel lm : modelModelList)
+        for (ProductModel lm : modelModelList)
             dp.add(new Object[]{lm});
 
         return dp.iterator();
