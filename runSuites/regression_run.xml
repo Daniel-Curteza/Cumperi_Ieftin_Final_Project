@@ -4,6 +4,7 @@
     <test thread-count="5" name="Cumperi_Ieftin_Final_Project">
         <classes>
             <class name="tests.AuthenticationTest"/>
+            <class name="tests.AddToWishlistTest "/>
         </classes>
     </test> <!-- Cumperi_Ieftin_Final_Project -->
 </suite>

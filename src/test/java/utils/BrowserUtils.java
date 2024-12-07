@@ -31,7 +31,6 @@ public class BrowserUtils {
         }
     }
 
-
     public static void generateScreenshots(String filename, WebDriver driver, boolean alertOn) throws IOException {
         if (alertOn)
             driver.switchTo().alert().accept();

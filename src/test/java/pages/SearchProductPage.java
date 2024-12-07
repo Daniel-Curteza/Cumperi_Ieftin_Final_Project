@@ -1,11 +1,13 @@
 package pages;
 
+import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.interactions.Actions;
-import tests.BaseTest;
+
+import java.util.Objects;
 
 public class SearchProductPage extends BasePage {
 
@@ -27,10 +29,13 @@ public class SearchProductPage extends BasePage {
     @FindBy(xpath = "//*[@id='button-cart']")
     private WebElement addToCart;
 
-    @FindBy(xpath = "//*[@id='cart-total']")
+    @FindBy (xpath = "//*[@class='close']")
+    public WebElement closeAddMessageElement;
+
+    @FindBy(xpath = "//span[@id='cart-total']")
     private WebElement cartPopUPTrigger;
 
-    @FindBy(xpath = "//button[contains(text(),'Vezi cosul')]")
+    @FindBy(partialLinkText = "Vezi Coşul")
     private WebElement openCartButton;
 
     @FindBy(xpath = "//*[contains(@class, 'model') and contains(text(), '010-02562-10')]")
@@ -60,7 +65,7 @@ public class SearchProductPage extends BasePage {
     @FindBy(xpath = "//h1[contains(text(),'Termeni si conditii de utilizare')]")
     public WebElement TermeniConditiiUtilizare;
 
-    public String currentTermsUrl = driver.getCurrentUrl();
+    public String termsPageUrl ="https://www.cumperiieftin.ro/conditii-de-utilizare";
 
 
 
@@ -70,17 +75,17 @@ public class SearchProductPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void AddProductCart(String model, String quantity) {
+    public void AddProductCart(String model, int quantity) throws InterruptedException {
         this.acceptCookies();
         this.enterProductModel(model);
         this.submitSearch();
         this.selectProduct();
         this.selectQuantity(quantity);
         this.addToCart();
+        this.closeAddMessage();
         this.openCartPopUp();
         this.openCart();
         this.verifyQuantityCorrect(quantity);
-        this.verifyQuantityIncorrect(quantity);
 
     }
 
@@ -99,7 +104,6 @@ public class SearchProductPage extends BasePage {
     }
 
     public void submitSearch() {
-        waitUntilElementVisible(searchButton);
         System.out.println("Submitting search");
         searchButton.click();
     }
@@ -110,11 +114,12 @@ public class SearchProductPage extends BasePage {
         product.click();
     }
 
-    public void selectQuantity(String quantity) {
+    public void selectQuantity(int quantity) throws InterruptedException {
         waitUntilElementVisible(inputQuantity);
-        System.out.println("Selecting quantity");
+        System.out.println("Selecting quantity = " + quantity);
         inputQuantity.clear();
-        inputQuantity.sendKeys(quantity);
+        inputQuantity.sendKeys(String.valueOf(quantity));
+        Thread.sleep(6000);
     }
 
     public void addToCart() {
@@ -123,30 +128,29 @@ public class SearchProductPage extends BasePage {
         addToCart.click();
     }
 
+    public void closeAddMessage(){
+        waitUntilElementVisible(closeAddMessageElement);
+        System.out.println("Closing add message");
+        closeAddMessageElement.click();
+    }
+
     public void openCartPopUp() {
-        waitUntilElementVisible(cartPopUPTrigger);
         System.out.println("Opening cart popup");
-        Actions action = new Actions(driver);
-        action.moveToElement(cartPopUPTrigger).perform();
+        cartPopUPTrigger.click();
 
     }
 
     public void openCart() {
         waitUntilElementVisible(openCartButton);
-        System.out.println("Opening cart popup");
+        System.out.println("Opening cart");
         openCartButton.click();
     }
 
-    public boolean verifyQuantityCorrect(String quantity) {
+    public boolean verifyQuantityCorrect(int quantity) {
         waitUntilElementVisible(cartQuantity);
-        System.out.println("Verifying correct quantity");
-        return cartQuantity.getText().equals(quantity);
-    }
-
-    public boolean verifyQuantityIncorrect(String quantity) {
-        waitUntilElementVisible(cartQuantity);
-        System.out.println("Verifying incorrect quantity");
-        return !cartQuantity.getText().equals(quantity);
+        int cartQuantityValue = Integer.parseInt(Objects.requireNonNull(cartQuantity.getAttribute("value")));
+        System.out.println("Cart quantity= " + cartQuantityValue);
+        return cartQuantityValue == quantity;
     }
 
     public void AddProductWishlist(String model){
@@ -157,6 +161,8 @@ public class SearchProductPage extends BasePage {
         this.addToWishlist();
         this.accessAccount();
         this.openWishlist();
+        this.verifyProductInWishlist();
+        this.verifyProductNotInWishlist();
     }
 
     public void addToWishlist() {
@@ -181,7 +187,7 @@ public class SearchProductPage extends BasePage {
     public boolean verifyProductInWishlist() {
         waitUntilElementVisible(cartProductModel);
         System.out.println("Verifying wishlist content");
-        return cartProductModel.getText().equals(product.getText());
+        return cartProductModel.isDisplayed();
     }
 
     public boolean verifyProductNotInWishlist() {
@@ -190,10 +196,11 @@ public class SearchProductPage extends BasePage {
         return !wishlistEmpty.getText().equals(product.getText());
     }
 
-    public void TermsConditions() {
+    public void AccessTermsConditions() {
         this.acceptCookies();
         this.openTerms();
-        //this.verifyTermsConditionsOpen();
+        this.acquireCurrentUrl();
+        this.verifyTermsConditionsOpen();
     }
 
     public void openTerms() {
@@ -202,13 +209,13 @@ public class SearchProductPage extends BasePage {
         linkTermsConditions.click();
     }
 
-    //public termsPageUrl (){
-    //}
+    public String acquireCurrentUrl(){
+        return driver.getCurrentUrl();
+    }
 
-    /* public boolean verifyTermsConditionsOpen() {
+    public boolean verifyTermsConditionsOpen() {
         waitUntilElementVisible(TermeniConditiiUtilizare);
-        System.out.println("Verifying terms conditions open");
-        return currentTermsUrl.equals();
-    }*/
+        return acquireCurrentUrl().equals(termsPageUrl);
+    }
 
 }

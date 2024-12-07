@@ -2,7 +2,15 @@
   {
     "prodModel": {
       "model": "010-02562-10",
+      "quantity": "1"
+    },
+    "modelError": ""
+  },
+  {
+    "prodModel": {
+      "model": "HMC-D300RD",
       "quantity": "3"
-    }
+    },
+    "modelError": ""
   }
 ]

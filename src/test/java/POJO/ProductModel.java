@@ -2,24 +2,22 @@ package POJO;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import lombok.Getter;
 
+@Getter
 @XmlRootElement
 public class ProductModel {
     private ProductModelModel prodModel;
     private String modelError;
     public ProductModel() {}
 
-    public ProductModel(String model, String quantity, String modelError) {
+    public ProductModel(String model, int quantity, String modelError) {
         this.prodModel= new ProductModelModel(model, quantity);
         this.modelError = modelError;
     }
 
-    public ProductModelModel getProdModel() {return prodModel;}
-
     @XmlElement
     public void setProdModel(ProductModelModel prodModel) {this.prodModel = prodModel;}
-
-    public String getModelError() {return modelError;}
 
     @XmlElement
     public void setModelError(String modelError) {this.modelError = modelError;}

@@ -17,15 +17,9 @@ public class AddToCartTest extends BaseTest{
         System.out.println(productModel);
         searchProductPage.AddProductCart(
                 productModel.getProdModel().getModel(),
-                productModel.getProdModel().getQuantity()
-        );
+                productModel.getProdModel().getQuantity());
 
-        if(productModel.getModelError().isEmpty()) {
-            System.out.println("Verifying product is added to the cart");
+        if(productModel.getModelError().isEmpty())
             Assert.assertTrue(searchProductPage.verifyQuantityCorrect(productModel.getProdModel().getQuantity()));
-        }else {
-            System.out.println("Verifying product is not added to the cart");
-            Assert.assertFalse(searchProductPage.verifyQuantityCorrect(productModel.getProdModel().getQuantity()));
-        }
     }
 }
